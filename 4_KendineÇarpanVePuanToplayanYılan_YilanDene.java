@@ -32,6 +32,7 @@ public class YilanDene extends ApplicationAdapter implements InputProcessor{
 	int[][] saha = new int[SAHAX][SAHAY];
 	
 	boolean oyunDevam = false;
+	boolean yonDegistirilebilir = true;
 	
 	@Override
 	public void create () {
@@ -148,6 +149,7 @@ public class YilanDene extends ApplicationAdapter implements InputProcessor{
 		if(oyunDevam)
 		{
 			oyunDevam = yilan.yuru();
+			yonDegistirilebilir = true;
 		}
 		else
 		{
@@ -176,26 +178,34 @@ public class YilanDene extends ApplicationAdapter implements InputProcessor{
 	public boolean keyDown(int keycode) {
 		if(keycode == Input.Keys.UP)
 		{
-			if(oyunDevam)
+			if(oyunDevam && yonDegistirilebilir) {
 				yilan.modDegistir(yilan.YUKARI);
+				yonDegistirilebilir = false;
+			}
 			return true;
 		}
 		else if(keycode == Input.Keys.DOWN)
 		{
-			if(oyunDevam)
+			if(oyunDevam && yonDegistirilebilir) {
 				yilan.modDegistir(yilan.ASAGI);
+				yonDegistirilebilir = false;
+			}
 			return true;
 		}
 		else if(keycode == Input.Keys.LEFT)
 		{
-			if(oyunDevam)
+			if(oyunDevam && yonDegistirilebilir) {
 				yilan.modDegistir(yilan.SOL);
+				yonDegistirilebilir = false;
+			}
 			return true;
 		}
 		else if(keycode == Input.Keys.RIGHT)
 		{
-			if(oyunDevam)
+			if(oyunDevam && yonDegistirilebilir) {
 				yilan.modDegistir(yilan.SAG);
+				yonDegistirilebilir = false;
+			}
 			return true;
 		}
 		else if(keycode == Input.Keys.E)
@@ -210,6 +220,7 @@ public class YilanDene extends ApplicationAdapter implements InputProcessor{
 			sahaDuzeni1();
 			yilan = new Yilan(3,3, saha);
 			oyunDevam = true;
+			yonDegistirilebilir = true;
 			return true;
 		}
 		else if(keycode == Input.Keys.NUM_1)
